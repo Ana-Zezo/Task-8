@@ -32,12 +32,29 @@ $sql = "CREATE TABLE IF NOT EXISTS `categories`(
     )";
 $result = mysqli_query($conn, $sql);
 
+// Create Table Product
+$create_product = "CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(75) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `cat_id` bigint(20) DEFAULT NULL)";
+$result = mysqli_query($conn, $create_product);
 // Product Sql
 $product_query = "ALTER TABLE `products` DROP FOREIGN KEY `products_ibfk_1`";
 $result = mysqli_query($conn, $product_query);
 $product_query = " ALTER TABLE `products` ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `categories`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;";
 $result = mysqli_query($conn, $product_query);
 
+// Create Table Carts
+$create_carts = "CREATE TABLE IF NOT EXISTS `carts` (
+  `id` bigint(20) NOT NULL,
+  `total` int(11) NOT NULL,
+  `product_id` int(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL)";
+$result = mysqli_query($conn, $create_carts);
 // Carts sql
 $carts_query = "ALTER TABLE `carts` DROP FOREIGN KEY `cart_ibfk_1`";
 $result = mysqli_query($conn, $carts_query);
@@ -48,6 +65,14 @@ $result = mysqli_query($conn, $carts_query);
 $carts_query = "ALTER TABLE `carts` ADD CONSTRAINT `carts_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE";
 $result = mysqli_query($conn, $carts_query);
 
+// Create Table Orders
+$order_query = "CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(11) NOT NULL,
+  `total_price` bigint(20) NOT NULL,
+  `process` enum('0','1') NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `product_id` int(11) NOT NULL)";
+$result = mysqli_query($conn, $order_query);
 // Order sql
 $order_query = "ALTER TABLE `orders` DROP FOREIGN KEY `orders_ibfk_1`";
 $result = mysqli_query($conn, $order_query);
