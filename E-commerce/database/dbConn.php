@@ -4,15 +4,15 @@ $password = "";
 $userName = "root";
 $dbName = "E-commerce";
 
-$conn = mysqli_connect($hostName, $userName, $password, $dbName);
+$conn = mysqli_connect($hostName, $userName, $password);
 $sql = "CREATE DATABASE IF NOT EXISTS `$dbName`";
 $result = mysqli_query($conn, $sql);
 if (!$conn) {
   echo "Error Connect" . mysqli_connect_error();
 }
+$conn = mysqli_connect($hostName, $userName, $password, $dbName);
 
 // Create Tables Users
-// $conn = mysqli_connect($hostName, $userName, $password, $dbName);
 $sql = "CREATE TABLE IF NOT EXISTS `users`(
     `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR (255),

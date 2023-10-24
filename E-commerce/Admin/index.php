@@ -24,6 +24,10 @@ $order_query = "SELECT SUM(`total_price`)As `Total` FROM `orders`";
 $resultOrder = mysqli_query($conn, $order_query);
 $rowOrder = mysqli_fetch_array($resultOrder, MYSQLI_ASSOC);
 $total = $rowOrder["Total"];
+$user_query = "SELECT COUNT(*) AS row_count FROM `users` WHERE `role`=0";
+$resultUser = mysqli_query($conn, $user_query);
+$user_arr = mysqli_fetch_array($resultUser, MYSQLI_ASSOC);
+$total_user = $user_arr["row_count"];
 ?>
 <div class="container">
     <div class="row">
@@ -82,8 +86,10 @@ $total = $rowOrder["Total"];
                                 <i class="material-icons opacity-10">add</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-3 text-capitalize ">Cart</p>
-                                <h4 class="mb-4 ">+91</h4>
+                                <p class="text-sm mb-3 text-capitalize ">Users</p>
+                                <h4 class="mb-4 ">
+                                    <?= $total_user ?>
+                                </h4>
                             </div>
                         </div>
                     </div>

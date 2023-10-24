@@ -28,6 +28,7 @@ if (checkRequest("POST")) {
         if (mysqli_num_rows($result) == 0) {
             $_SESSION["email_exist"] = "Email Not Exist";
             redirect("../register.php");
+            die;
         }
         $email = mysqli_real_escape_string($conn, $email);
         $password = mysqli_real_escape_string($conn, $password);
