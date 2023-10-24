@@ -8,17 +8,18 @@ $conn = mysqli_connect($hostName, $userName, $password, $dbName);
 $sql = "CREATE DATABASE IF NOT EXISTS `$dbName`";
 $result = mysqli_query($conn, $sql);
 if (!$conn) {
-    echo "Error Connect" . mysqli_connect_error();
+  echo "Error Connect" . mysqli_connect_error();
 }
 
 // Create Tables Users
-$conn = mysqli_connect($hostName, $userName, $password, $dbName);
+// $conn = mysqli_connect($hostName, $userName, $password, $dbName);
 $sql = "CREATE TABLE IF NOT EXISTS `users`(
     `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
     `name` VARCHAR (50),
     `email` VARCHAR (75) ,
     `phone` VARCHAR (25) ,
-    `password` VARCHAR(50)
+    `password` VARCHAR(50),
+    `role` int(11) NOT NULL DEFAULT 0
     )";
 $result = mysqli_query($conn, $sql);
 
