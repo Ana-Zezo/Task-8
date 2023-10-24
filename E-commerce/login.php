@@ -22,6 +22,7 @@
                         keyAndValueSession("login_error", "email");
                         keyAndValueSession("login_error", "password");
                         keySession("message");
+                        keySession("password_error");
 
                         ?>
                         <form action="controller/LoginController.php" method="POST">

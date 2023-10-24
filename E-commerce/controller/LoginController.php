@@ -35,15 +35,17 @@ if (checkRequest("POST")) {
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
         $secrit_password = $row["password"];
-        $secrit_password = $row["password"];
         $checkPassword = password_verify($password, $secrit_password);
-        // password_verify($password, );
-        $login_query = "SELECT * FROM `users` WHERE`email` = '$email' AND  $checkPassword = 1";
-
-        $login_result = mysqli_query($conn, $login_query);
-        $users = mysqli_fetch_array($login_result, MYSQLI_ASSOC);
-
-
+        if ($row["email"] == $email && $row["password"] == $checkPassword) {
+            $login_query = "SELECT * FROM `users` WHERE`email` = '$email' AND  $checkPassword = 1";
+            $result = mysqli_query($conn, $login_query);
+            $login_result = mysqli_query($conn, $login_query) or die(mysqli_error($conn));
+            $users = mysqli_fetch_array($login_result, MYSQLI_ASSOC);
+        } else {
+            $_SESSION["password_error"] = "Incorrect Password";
+            redirect("../login.php");
+            die;
+        }
         if (mysqli_num_rows($login_result) > 0) {
             $_SESSION["auth"] = [
                 "id" => $users["id"],
