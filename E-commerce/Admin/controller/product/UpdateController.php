@@ -75,7 +75,7 @@ if (checkRequest("POST")) {
                 if ($errorImage == 0) {
                     if ($sizeImage < 5000000) {
                         $newName = uniqid("", true) . "." . $fileExe;
-                        move_uploaded_file($tmpName, "../../img/product" . $newName);
+                        move_uploaded_file($tmpName, "../../img/product_img/" . $newName);
                     } else {
                         $errors["image"] = "Image Must Be Less Than 5M";
                     }

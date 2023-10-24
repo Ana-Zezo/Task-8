@@ -32,4 +32,28 @@ $sql = "CREATE TABLE IF NOT EXISTS `categories`(
     )";
 $result = mysqli_query($conn, $sql);
 
-?>
+// Product Sql
+$product_query = "ALTER TABLE `products` DROP FOREIGN KEY `products_ibfk_1`";
+$result = mysqli_query($conn, $product_query);
+$product_query = " ALTER TABLE `products` ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`cat_id`) REFERENCES `categories`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;";
+$result = mysqli_query($conn, $product_query);
+
+// Carts sql
+$carts_query = "ALTER TABLE `carts` DROP FOREIGN KEY `cart_ibfk_1`";
+$result = mysqli_query($conn, $carts_query);
+$carts_query = "ALTER TABLE `carts` ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE CASCADE ON UPDATE CASCADE";
+$result = mysqli_query($conn, $carts_query);
+$carts_query = "ALTER TABLE `carts` DROP FOREIGN KEY `carts_ibfk_2`";
+$result = mysqli_query($conn, $carts_query);
+$carts_query = "ALTER TABLE `carts` ADD CONSTRAINT `carts_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE";
+$result = mysqli_query($conn, $carts_query);
+
+// Order sql
+$order_query = "ALTER TABLE `orders` DROP FOREIGN KEY `orders_ibfk_1`";
+$result = mysqli_query($conn, $order_query);
+$order_query = "ALTER TABLE `orders` ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE ON UPDATE CASCADE";
+$result = mysqli_query($conn, $order_query);
+$order_query = "ALTER TABLE `orders` DROP FOREIGN KEY `orders_ibfk_2`";
+$result = mysqli_query($conn, $order_query);
+$order_query = "ALTER TABLE `orders` ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE CASCADE ON UPDATE CASCADE";
+$result = mysqli_query($conn, $order_query);

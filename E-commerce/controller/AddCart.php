@@ -31,7 +31,7 @@ if (checkRequest("GET")) {
     $sql = "INSERT INTO `carts`(`total`,`product_id`,`user_id`)
     VALUES($total,$product_id,$user_id)";
     $result = mysqli_query($conn, $sql);
-    $_SESSION["insert_data"] = "Successfully Insert Data";
+    $_SESSION["insert_data"] = "Successfully Add Product";
     redirect("../cart.php?user_id=$user_id");
     die;
 } else {

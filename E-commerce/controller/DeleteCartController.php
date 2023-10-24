@@ -17,7 +17,7 @@ $cart_id = $_GET["cart_id"];
 $user_id = $_GET["user_id"];
 $delete_query = "DELETE FROM `carts` WHERE `id`= $cart_id";
 $result_delete = mysqli_query($conn, $delete_query);
-$_SESSION["success_order"] = "Add To Order";
+$_SESSION["success_order"] = "Successfully Delete Order";
 redirect("../cart.php?user_id=$user_id");
 die;
 ?>
