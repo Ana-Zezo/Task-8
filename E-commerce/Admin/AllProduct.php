@@ -1,16 +1,6 @@
 <?php
 include_once("./pages/header.php");
-if (isset($_SESSION["auth"])) {
-    if ($_SESSION["auth"]["role"] == 0) {
-        $_SESSION["not_auth"] = "You Are Not Authorization To Access Dashboard";
-        redirect("../index.php");
-        die;
-    }
-} else {
-    $_SESSION["login"] = "Login to Continue";
-    redirect("../login.php");
-    die;
-}
+
 keySession("insert_success", "info");
 $sql = "SELECT * FROM `products`";
 $result = mysqli_query($conn, $sql);

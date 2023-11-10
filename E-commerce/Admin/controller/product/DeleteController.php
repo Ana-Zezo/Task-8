@@ -20,9 +20,14 @@ if (checkRequest("GET")) {
     foreach ($products as $key => $item) {
         if ($products[$key]["id"] == $_GET["id"]) {
             $id = $products[$key]["id"];
+            $sql = "SELECT image FROM products WHERE id=$id";
+            $result = mysqli_query($conn, $sql);
+            $arr = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            deleteImage("../../img/product_img/" . $arr["image"]);
             $sql = "DELETE FROM `products` WHERE `id` = '$id'";
             $result = mysqli_query($conn, $sql);
             $_SESSION["success_delete"] = "Successfully Delete";
+
             redirect("../../AllProduct.php");
             die;
         }

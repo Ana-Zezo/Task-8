@@ -2,7 +2,6 @@
 session_start();
 require_once("../database/dbConn.php");
 require_once("../function/helper.php");
-
 // Check Request POST
 if (checkRequest("POST")) {
     $errors = [];
@@ -10,7 +9,6 @@ if (checkRequest("POST")) {
     foreach ($_POST as $key => $item) {
         $$key = sanitize($item);
     }
-
     // Validation Name 
     if (requiredVal($name)) {
         $errors["name"] = "Name Is Required Value";
@@ -73,24 +71,19 @@ if (checkRequest("POST")) {
                     redirect("../register.php");
                     die;
                 }
-
             } else {
                 $_SESSION["confirm_password_error"] = "Not Confirm Password";
                 redirect("../register.php");
                 die;
             }
         }
-
     } else {
         $_SESSION["register_error"] = $errors;
         redirect("../register.php");
         die;
     }
-
-
 } else {
     $_SESSION["request_error"] = "Request_error";
     redirect("../register.php");
     die;
 }
-?>

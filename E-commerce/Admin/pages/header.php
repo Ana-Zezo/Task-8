@@ -5,6 +5,17 @@ session_start();
 $scriptName = $_SERVER["SCRIPT_NAME"];
 $stringToArray = explode("/", $scriptName);
 $page = end($stringToArray);
+if (isset($_SESSION["auth"])) {
+    if ($_SESSION["auth"]["role"] == 0) {
+        $_SESSION["not_auth"] = "You Are Not Authorization To Access Dashboard";
+        redirect("../index.php");
+        die;
+    }
+} else {
+    $_SESSION["login"] = "Login to Continue";
+    redirect("../login.php");
+    die;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

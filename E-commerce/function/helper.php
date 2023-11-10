@@ -123,5 +123,13 @@ if (!function_exists("keyAndValueSession")) {
     }
 }
 
+function deleteImage($image)
+{
+    if (file_exists($image)) {
+        return unlink($image) ? true : false;
+    } else {
+        return false;
+    }
+}
 
 ?>
